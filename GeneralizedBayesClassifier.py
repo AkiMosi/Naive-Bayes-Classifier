@@ -26,6 +26,7 @@ clas_data.remove(clas_data[0])
 yes_count=clas_data.count('Yes')
 no_count =clas_data.count('No')
 clas=list(set(clas_data))
+clas.sort()
 lst=np.arange(0,len(clas)+1,1)
 clas=dict(zip(clas,lst))
 
@@ -35,7 +36,9 @@ for i in range(len(data)):
     lst=[]
     features_name.append(data[i][0])
     data[i].remove(features_name[i])
-    features.append(list(set(data[i])))
+    temp=list(set(data[i]))
+    temp.sort()
+    features.append(temp)
     lst=np.arange(0,len(features[i])+1,1)
     features[i]=dict(zip(features[i],lst))
     
@@ -84,15 +87,12 @@ for i in range(len(ii)):
         temp[0]+=1/len(cpt[ii[i]])
         cpt[ii[i]][j][kk[i]]=temp[0]/temp[1]
         
-#print("Enter the test data : ")
-    
-test=['Rainy','High','Normal','Weak']
+print("Enter the test data : ")
+test=[]
 for i in range(len(features)):
-#    print("Enter the feature ",i)
-#    temp=input()
-    test[i]=features[i][test[i]]
-#    test.append(temp[i])
-
+    print("Enter the feature ",i)
+    temp=input()
+    test.append(features[i][temp])
     
 num=yes_count/len(data)
 den=no_count/len(data)
