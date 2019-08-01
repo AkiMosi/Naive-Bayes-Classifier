@@ -84,7 +84,7 @@ for i in range(len(ii)):
             elif(kk[i]==1):
                 temp[1]+=no_count
                 print("2")
-        else:
+        elif(temp[0]!=0):
             temp[1]+=1
             print("3",kk[i])
         cpt[ii[i]][j][kk[i]]=temp[0]/temp[1]
