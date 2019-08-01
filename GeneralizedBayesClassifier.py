@@ -63,14 +63,12 @@ for i in range (len(data)):
             cpt[j][data[i][j]][0]+=1/yes_count
 
 ii=[]
-jj=[]
 kk=[]
 for i in range(len(cpt)):
     for j in range(len(cpt[i])):
         for k in range(len(cpt[i][j])):
             if(cpt[i][j][k]==0):
                 ii.append(i)
-                jj.append(j)
                 kk.append(k)
 
 for i in range(len(ii)):
