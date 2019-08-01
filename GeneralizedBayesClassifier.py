@@ -71,22 +71,17 @@ for i in range(len(cpt)):
                 kk.append(k)
 
 for i in range(len(ii)):
-    print(cpt[ii[i]])
     for j in range(len(cpt[ii[i]])):       
         temp=float(cpt[ii[i]][j][kk[i]])
         temp=list(temp.as_integer_ratio())
-        print('num : ',temp[0],' den : ',temp[1],'k:',kk[i])
-        temp[0]+=1/len(cpt[ii[i]])
         if(temp[0]==0):
             if(kk[i]==0):
                 temp[1]+=yes_count
-                print('1')
             elif(kk[i]==1):
                 temp[1]+=no_count
-                print("2")
-        elif(temp[0]!=0):
+        else:
             temp[1]+=1
-            print("3",kk[i])
+        temp[0]+=1/len(cpt[ii[i]])
         cpt[ii[i]][j][kk[i]]=temp[0]/temp[1]
         
 #print("Enter the test data : ")
@@ -107,4 +102,5 @@ for i in range(len(features)):
     den*=cpt[i][test[i]][1]       
 
 prob=num/(num+den)
-print(prob)
+print('Probability that you can play tennis : ',prob)
+
