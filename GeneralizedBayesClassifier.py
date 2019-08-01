@@ -4,9 +4,10 @@ import numpy as np
 
 #xl.open_workbook() is to open the workbook 
 #sheet_by_index() is to open the first data sheet    
-wb = xl.open_workbook("data.xlsx")
+wb = xl.open_workbook("mammal.xlsx")
 sheet = wb.sheet_by_index(0)
 
+#initializing all the required list
 data=[]
 features=[]
 features_name=[]
@@ -31,8 +32,8 @@ clas_name=clas_data[0]
 clas_data.remove(clas_data[0])
 
 #to get the count
-yes_count=clas_data.count('Yes')
-no_count =clas_data.count('No')
+yes_count=clas_data.count('Mammal')
+no_count =clas_data.count('Not Mammal')
 
 #to get the unique values of the class 
 clas=list(set(clas_data))
@@ -74,10 +75,10 @@ for i in range(len(features)):
 
 #constructing the conditional probability matrix
 for i in range (len(data)):
-    if(clas_data[i]== "No"):
+    if(clas_data[i]== "Not Mammal"):
         for j in range(len(features)):
             cpt[j][data[i][j]][1]+=1/no_count
-    elif(clas_data[i] == 'Yes'):
+    elif(clas_data[i] == 'Mammal'):
         for j in range(len(features)):
             cpt[j][data[i][j]][0]+=1/yes_count
 
