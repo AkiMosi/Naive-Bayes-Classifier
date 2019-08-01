@@ -4,7 +4,7 @@ import numpy as np
 
 #xl.open_workbook() is to open the workbook 
 #sheet_by_index() is to open the first data sheet    
-wb = xl.open_workbook("mammal.xlsx")
+wb = xl.open_workbook("data.xlsx")
 sheet = wb.sheet_by_index(0)
 
 #initializing all the required list
@@ -30,10 +30,11 @@ lst=[]
 clas_data=data.pop(no_of_cols-1)
 clas_name=clas_data[0]
 clas_data.remove(clas_data[0])
+clas_data = [v.lower() for v in clas_data ]
 
 #to get the count
-yes_count=clas_data.count('Mammal')
-no_count =clas_data.count('Not Mammal')
+yes_count=clas_data.count('yes'.lower())
+no_count =clas_data.count('no'.lower())
 
 #to get the unique values of the class 
 clas=list(set(clas_data))
@@ -54,10 +55,14 @@ for i in range(len(data)):
     #to get the unique values of the features 
     temp=list(set(data[i]))
     temp.sort()
+    temp=[v.lower() for v in temp]
     features.append(temp)
     lst=np.arange(0,len(features[i])+1,1)
     features[i]=dict(zip(features[i],lst))
     
+for i in range(len(data)):
+    data[i]=[v.lower() for v in data[i]]
+
 #to convert the data from words to numbers 
 for i in range(len(data[0])):
     for j in range(len(data)):
@@ -75,10 +80,10 @@ for i in range(len(features)):
 
 #constructing the conditional probability matrix
 for i in range (len(data)):
-    if(clas_data[i]== "Not Mammal"):
+    if(clas_data[i]== "No".lower()):
         for j in range(len(features)):
             cpt[j][data[i][j]][1]+=1/no_count
-    elif(clas_data[i] == 'Mammal'):
+    elif(clas_data[i] == 'yes'.lower()):
         for j in range(len(features)):
             cpt[j][data[i][j]][0]+=1/yes_count
 
@@ -127,5 +132,5 @@ for i in range(len(features)):
     den*=cpt[i][test[i]][1]       
 
 prob=num/(num+den)
-print('Probability that you can play tennis : ',prob)
+print('Probability : ',prob)
 
